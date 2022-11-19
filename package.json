@@ -1,0 +1,25 @@
+{
+  "name": "ci-0142-kane-taxi-web-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennissolano/CI-0142-Kane-Taxi-Web-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dennissolano/CI-0142-Kane-Taxi-Web-App/issues"
+  },
+  "homepage": "https://github.com/dennissolano/CI-0142-Kane-Taxi-Web-App#readme",
+  "devDependencies": {
+    "@cypress/xpath": "^2.0.3",
+    "cypress": "^11.1.0",
+    "prettier": "2.7.1"
+  }
+}
