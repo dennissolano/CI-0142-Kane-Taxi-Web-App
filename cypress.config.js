@@ -7,6 +7,7 @@ module.exports = defineConfig({
     },
     baseUrl: 'https://kane-web.web.app/',
     testingEmail: 'kanecontroladora@mailinator.com',
-    testingPassword: 'asdf1234'
+    testingPassword: 'asdf1234',
+    defaultCommandTimeout: 10000
   }
 });
