@@ -12,7 +12,7 @@ describe('Kane Taxi Tests Suite', () => {
     cy.logout();
   });
 
-  it.skip('testTaxiDriverDetails', () => {
+  it('testTaxiDriverDetails', () => {
     cy.log('Test iD: 2');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
@@ -53,7 +53,7 @@ describe('Kane Taxi Tests Suite', () => {
     cy.logout();
   });
 
-  it.skip('testEditTaxiDriver', () => {
+  it('testEditTaxiDriver', () => {
     cy.log('Test ID: 3');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
