@@ -19,38 +19,25 @@ describe('Kane Taxi Tests Suite', () => {
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openTaxiDriverDetailsByName(taxiDriverDetails.name);
 
-      // ToDo: refactor.
-      cy.xpath("//strong[contains(text(), 'Nombre')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.name
-      );
+      let driver = {
+        'Nombre': taxiDriverDetails.name,
+        'Cédula': taxiDriverDetails.id,
+        'Placa': taxiDriverDetails.carId,
+        'Teléfono': taxiDriverDetails.phoneNumber,
+        'Correo Electrónico': taxiDriverDetails.email,
+        'Estado': taxiDriverDetails.status
+      }
 
-      cy.xpath("//strong[contains(text(), 'Cédula')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.id
-      );
-
-      cy.xpath("//strong[contains(text(), 'Placa')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.carId
-      );
-
-      cy.xpath("//strong[contains(text(), 'Teléfono')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.phoneNumber
-      );
-
-      cy.xpath("//strong[contains(text(), 'Correo Electrónico')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.email
-      );
-
-      cy.xpath("//strong[contains(text(), 'Estado')]/parent::*").should(
-        'contain.text',
-        taxiDriverDetails.status
-      );
+      Object.entries(driver).forEach((key, value) => {
+        cy.xpath("//strong[contains(text(), '" + key + "')]/parent::*").should(
+          'contain.text',
+          value
+        );
+      });
+      
     });
 
+    
     cy.logout();
   });
 
