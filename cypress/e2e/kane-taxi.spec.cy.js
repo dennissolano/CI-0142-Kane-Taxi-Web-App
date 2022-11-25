@@ -11,6 +11,7 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testTaxiDriverDetails', () => {
+    cy.log('Test iD: 2');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openTaxiDriverDetailsByName(taxiDriverDetails.name);
@@ -51,41 +52,30 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testEditTaxiDriver', () => {
+    cy.log('Test ID: 3');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openEditTaxiDriverByName(taxiDriverDetails.name);
     });
 
-    cy.wait(3000)
-    cy.xpath(
-      `//*[@id="idCheckbox"]`
-    ).click();
+    cy.wait(3000);
+    cy.xpath(`//*[@id="idCheckbox"]`).click();
 
     cy.xpath(
-        `//html/body/app-root/app-detalles-taxista/form/div/div[1]/div[1]/div[3]/button`
+      `//html/body/app-root/app-detalles-taxista/form/div/div[1]/div[1]/div[3]/button`
     ).click();
 
-    cy.wait(3000)
-    cy.xpath(`//*[@id="toast-container"]`).should(
-        'not.be.empty'
-    );
+    cy.wait(3000);
+    cy.xpath(`//*[@id="toast-container"]`).should('not.be.empty');
   });
 
   it('testExportTaxiDriverReport', () => {
     cy.login();
 
-    cy.xpath(
-      `//html/body/app-root/app-home/app-header/ul/li[4]/a`
-    ).click();
+    cy.xpath(`//html/body/app-root/app-home/app-header/ul/li[4]/a`).click();
 
-    cy.xpath(
-      `//html/body/app-root/app-reports/div/div[1]/div[1]/button`
-    ).click();
-    
-    cy.xpath(
-      `//html/body/app-root/app-reports/div/div[2]/div/div[1]/button`
-    ).click();
+    cy.xpath(`//html/body/app-root/app-reports/div/div[1]/div[1]/button`).click();
 
+    cy.xpath(`//html/body/app-root/app-reports/div/div[2]/div/div[1]/button`).click();
   });
-
 });
