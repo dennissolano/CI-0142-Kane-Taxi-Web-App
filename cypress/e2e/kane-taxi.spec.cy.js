@@ -49,15 +49,17 @@ describe('Kane Taxi Tests Suite', () => {
       HomePage.openEditTaxiDriverByName(taxiDriverDetails.name);
     });
 
-    cy.wait(3000);
+    cy.wait(1000);
     cy.xpath(`//*[@id="idCheckbox"]`).click();
 
     cy.xpath(
       `//html/body/app-root/app-detalles-taxista/form/div/div[1]/div[1]/div[3]/button`
     ).click();
 
-    cy.wait(3000);
+    cy.wait(1000);
     cy.xpath(`//*[@id="toast-container"]`).should('not.be.empty');
+
+
   });
 
   it('testExportTaxiDriverReport', () => {
@@ -73,7 +75,23 @@ describe('Kane Taxi Tests Suite', () => {
     cy.login();
     NavBar.goToReportsPage();
     ReportsPage.downloadCustomersReport();
-    cy.verifyDownload('KaneTaxi_reporte_taxistas.xlsx');
+    cy.verifyDownload('KaneTaxi_reporte_clientas.xlsx');
+  });
+
+  it('testInvalidConfiguration', () => {
+    cy.log('Test ID: 7');
+    cy.login();
+    NavBar.goToConfigurationPage();
+
+    cy.xpath('//*[@id="firstKMCost-edit-button"]').click();
+    
+    cy.wait(1000);
+    cy.xpath('//*[@id="firstKMCost-input"]').type('a');
+
+    cy.xpath('//html/body/app-root/app-configuration/div/div[1]/div[2]/div[2]/button[2]').click();
+
+    cy.wait(1000);
+    cy.xpath(`//*[@id="toast-container"]`).should('not.be.empty');
   });
 
 });
