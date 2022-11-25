@@ -44,6 +44,7 @@ describe('Kane Taxi Tests Suite', () => {
   it('testEditTaxiDriver', () => {
     cy.log('Test ID: 3');
     cy.login();
+
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openEditTaxiDriverByName(taxiDriverDetails.name);
     });
@@ -66,4 +67,13 @@ describe('Kane Taxi Tests Suite', () => {
     ReportsPage.downloadtTaxiDriversReport();
     cy.verifyDownload('KaneTaxi_reporte_taxistas.xlsx');
   });
+
+  it('testExportCustomersReport', () => {
+    cy.log('Test ID: 5');
+    cy.login();
+    NavBar.goToReportsPage();
+    ReportsPage.downloadCustomersReport();
+    cy.verifyDownload('KaneTaxi_reporte_taxistas.xlsx');
+  });
+
 });
