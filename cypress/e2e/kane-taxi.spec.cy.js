@@ -94,4 +94,29 @@ describe('Kane Taxi Tests Suite', () => {
     cy.xpath(`//*[@id="toast-container"]`).should('not.be.empty');
   });
 
+  it('testValidConfiguration', () => {
+    cy.log('Test ID: 8');
+    cy.login();
+    NavBar.goToConfigurationPage();
+    cy.wait(1000);
+
+    let editButton = cy.xpath('//*[@id="firstKMCost-edit-button"]');
+    let entrada = cy.xpath('//*[@id="firstKMCost-input"]');
+    let confirmButton = cy.xpath('//html/body/app-root/app-configuration/div/div[1]/div[2]/div[2]/button[2]');
+
+    // lo probamos 2 veces para que vuelva a quedar en 800
+    let values = ['200', '800'];
+
+    values.forEach((value) => {
+      editButton.click();
+      entrada.clear();
+      entrada.type(value);
+      confirmButton.click();
+  
+      cy.wait(500);
+      entrada.should('have.value', value);
+    });
+
+  });
+
 });
