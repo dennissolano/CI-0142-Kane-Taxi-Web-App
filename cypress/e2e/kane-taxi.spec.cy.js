@@ -4,6 +4,7 @@ import ReportsPage from '../pages/ReportsPage';
 
 describe('Kane Taxi Tests Suite', () => {
   it('testLogin', () => {
+    cy.log('Test ID: 1');
     cy.login();
   });
 
@@ -13,7 +14,7 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testTaxiDriverDetails', () => {
-    cy.log('Test iD: 2');
+    cy.log('Test ID: 2');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openTaxiDriverDetailsByName(taxiDriverDetails.name);
@@ -72,6 +73,7 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testExportTaxiDriverReport', () => {
+    cy.log('Test ID: 4');
     cy.login();
     NavBar.goToReportsPage();
     ReportsPage.downloadtTaxiDriversReport();
