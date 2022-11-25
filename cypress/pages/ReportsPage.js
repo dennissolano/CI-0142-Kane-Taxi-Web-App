@@ -21,7 +21,7 @@ class ReportsPage {
 
   downloadtTaxiDriversReport() {
     this.openTaxiDriversInfo();
-    this.exportTaxiDriversReportToExcelButton().click();
+    this.elements.exportTaxiDriversReportToExcelButton().click();
   }
 
   openCustomersInfo() {
@@ -30,7 +30,7 @@ class ReportsPage {
 
   downloadCustomersReport() {
     this.openCustomersInfo();
-    this.exportCustomerReportToExcelButton().click();
+    this.elements.exportCustomerReportToExcelButton().click();
   }
 
   openInactiveTaxiDrivers() {
