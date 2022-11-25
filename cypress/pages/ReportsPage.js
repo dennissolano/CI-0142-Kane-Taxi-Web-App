@@ -1,16 +1,18 @@
-const {xorBy} = require('cypress/types/lodash');
-
 class ReportsPage {
   elements = {
     taxiDriversButton: () => cy.xpath("//button[text()=' Taxistas ']"),
     customersButton: () => cy.xpath("//button[text()=' Clientes ']"),
     inactiveTaxiDriversButton: () => cy.xpath("//button[text()=' Taxistas Inactivas ']"),
 
-    // Export to Excel buttons.
     exportCustomerReportToExcelButton: () =>
       cy.xpath("//table[@id='tableClients']//following-sibling::button"),
     exportTaxiDriversReportToExcelButton: () =>
-      cy.xpath("//table[@id='tableDrivers']//following-sibling::button")
+      cy.xpath("//table[@id='tableDrivers']//following-sibling::button"),
+
+    enableTaxiDriverByNameButton: (driverName) =>
+      cy.xpath(
+        `//div[@id='inactiveUsers']//a[contains(text(), ' ${driverName}' )]//ancestor::div[contains(@class,'border')]//child::div[@class='buttonActivate']//button`
+      )
   };
 
   openTaxiDriversInfo() {
@@ -33,6 +35,12 @@ class ReportsPage {
 
   openInactiveTaxiDrivers() {
     this.elements.inactiveTaxiDriversButton().click();
+  }
+
+  enableInactiveTaxiDriverByName(driverName) {
+    this.openInactiveTaxiDrivers();
+    this.elements.enableTaxiDriverByNameButton(driverName).click();
+    // Cypress automatically closes the confirmation alert window.
   }
 }
 
