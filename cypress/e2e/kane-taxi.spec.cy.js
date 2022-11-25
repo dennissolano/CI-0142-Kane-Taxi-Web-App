@@ -28,7 +28,7 @@ describe('Kane Taxi Tests Suite', () => {
         'Estado': taxiDriverDetails.status
       }
 
-      Object.entries(driver).forEach((key, value) => {
+      Object.entries(driver).forEach(([key, value]) => {
         cy.xpath("//strong[contains(text(), '" + key + "')]/parent::*").should(
           'contain.text',
           value
