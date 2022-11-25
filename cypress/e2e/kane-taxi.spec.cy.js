@@ -131,4 +131,16 @@ describe('Kane Taxi Tests Suite', () => {
     results.should('exist');
   });
 
+  it('testSearchNonExistentDriver', () => {
+    cy.log('Test ID: 11');
+    cy.login();
+    
+    let input = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/input');
+    input.type("Eduardo");
+    let searchButton = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/span/button');
+    searchButton.click();
+    let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div')
+    results.should('not.exist');
+  });
+
 });
