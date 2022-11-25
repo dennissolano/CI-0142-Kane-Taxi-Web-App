@@ -30,6 +30,7 @@ import NavBar from '../pages/commons/NavBar';
 Cypress.Commands.add('login', () => {
   LoginPage.visit();
   LoginPage.login(Cypress.config().testingEmail, Cypress.config().testingPassword);
+  cy.wait(3000);
 });
 
 Cypress.Commands.add('logout', () => {

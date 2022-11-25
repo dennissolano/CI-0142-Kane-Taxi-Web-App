@@ -7,19 +7,19 @@ class NavBar {
     logoutButton: () => cy.xpath("//button[contains(text(), 'Cerrar Sesión')]")
   };
 
-  openHome() {
+  goToHomePage() {
     this.elements.homeLink().click();
   }
 
-  openNotifications() {
+  goToNotificationsPage() {
     this.elements.notifcationLink().click();
   }
 
-  openReports() {
+  goToReportsPage() {
     this.elements.reportsLink().click();
   }
 
-  openConfiguration() {
+  goToConfigurationPage() {
     this.elements.configurationLink().click();
   }
 

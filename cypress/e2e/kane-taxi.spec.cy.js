@@ -1,7 +1,10 @@
 import HomePage from '../pages/HomePage';
+import NavBar from '../pages/commons/NavBar';
+import ReportsPage from '../pages/ReportsPage';
 
 describe('Kane Taxi Tests Suite', () => {
   it('testLogin', () => {
+    cy.log('Test ID: 1');
     cy.login();
   });
 
@@ -11,7 +14,7 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testTaxiDriverDetails', () => {
-    cy.log('Test iD: 2');
+    cy.log('Test ID: 2');
     cy.login();
     cy.fixture('testTaxiDriverDetails').then((taxiDriverDetails) => {
       HomePage.openTaxiDriverDetailsByName(taxiDriverDetails.name);
@@ -70,12 +73,10 @@ describe('Kane Taxi Tests Suite', () => {
   });
 
   it('testExportTaxiDriverReport', () => {
+    cy.log('Test ID: 4');
     cy.login();
-
-    cy.xpath(`//html/body/app-root/app-home/app-header/ul/li[4]/a`).click();
-
-    cy.xpath(`//html/body/app-root/app-reports/div/div[1]/div[1]/button`).click();
-
-    cy.xpath(`//html/body/app-root/app-reports/div/div[2]/div/div[1]/button`).click();
+    NavBar.goToReportsPage();
+    ReportsPage.downloadtTaxiDriversReport();
+    cy.verifyDownload('KaneTaxi_reporte_taxistas.xlsx');
   });
 });
