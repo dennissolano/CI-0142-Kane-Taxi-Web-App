@@ -43,7 +43,7 @@ class ReportsPage {
   enableInactiveTaxiDriverByName(driverName) {
     this.openInactiveTaxiDrivers();
     this.elements.enableTaxiDriverByNameButton(driverName).click();
-    this.elements.customersButton().should('exist').and('be.visible');
+    this.elements.taxiDriverEnabledMessage().should('exist').and('be.visible');
     // Cypress automatically closes the confirmation alert window.
   }
 }
