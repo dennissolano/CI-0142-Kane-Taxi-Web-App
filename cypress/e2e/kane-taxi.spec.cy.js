@@ -122,7 +122,7 @@ describe('Kane Taxi Tests Suite', () => {
     cy.login();
 
     let input = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/input');
-    input.type('Lopez');
+    input.type('Automation');
     let searchButton = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/span/button');
     searchButton.click();
     let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div');
