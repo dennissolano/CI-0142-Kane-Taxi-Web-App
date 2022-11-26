@@ -24,7 +24,7 @@ class NavBar {
   }
 
   logout() {
-    this.elements.logoutButton().click();
+    this.elements.logoutButton().click({force: true});
   }
 }
 
