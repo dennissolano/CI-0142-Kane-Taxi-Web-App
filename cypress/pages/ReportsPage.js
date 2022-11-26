@@ -12,7 +12,10 @@ class ReportsPage {
     enableTaxiDriverByNameButton: (driverName) =>
       cy.xpath(
         `//div[@id='inactiveUsers']//a[contains(text(), ' ${driverName}' )]//ancestor::div[contains(@class,'border')]//child::div[@class='buttonActivate']//button`
-      )
+      ),
+
+    taxiDriverEnabledMessage: () =>
+      cy.xpath("//div[contains(@aria-label, 'Se reactivó la usuaria al sistema')]")
   };
 
   openTaxiDriversInfo() {
@@ -40,6 +43,7 @@ class ReportsPage {
   enableInactiveTaxiDriverByName(driverName) {
     this.openInactiveTaxiDrivers();
     this.elements.enableTaxiDriverByNameButton(driverName).click();
+    this.elements.customersButton().should('exist').and('be.visible');
     // Cypress automatically closes the confirmation alert window.
   }
 }
