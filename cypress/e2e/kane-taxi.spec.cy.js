@@ -1,6 +1,7 @@
 import HomePage from '../pages/HomePage';
 import NavBar from '../pages/commons/NavBar';
 import ReportsPage from '../pages/ReportsPage';
+import TaxiDriverDetailsPage from '../pages/TaxiDriverDetailsPage';
 
 describe('Kane Taxi Tests Suite', () => {
   it('testLogin', () => {
@@ -20,13 +21,13 @@ describe('Kane Taxi Tests Suite', () => {
       HomePage.openTaxiDriverDetailsByName(taxiDriverDetails.name);
 
       let driver = {
-        'Nombre': taxiDriverDetails.name,
-        'Cédula': taxiDriverDetails.id,
-        'Placa': taxiDriverDetails.carId,
-        'Teléfono': taxiDriverDetails.phoneNumber,
+        Nombre: taxiDriverDetails.name,
+        Cédula: taxiDriverDetails.id,
+        Placa: taxiDriverDetails.carId,
+        Teléfono: taxiDriverDetails.phoneNumber,
         'Correo Electrónico': taxiDriverDetails.email,
-        'Estado': taxiDriverDetails.status
-      }
+        Estado: taxiDriverDetails.status
+      };
 
       Object.entries(driver).forEach(([key, value]) => {
         cy.xpath("//strong[contains(text(), '" + key + "')]/parent::*").should(
@@ -34,10 +35,8 @@ describe('Kane Taxi Tests Suite', () => {
           value
         );
       });
-      
     });
 
-    
     cy.logout();
   });
 
@@ -58,8 +57,6 @@ describe('Kane Taxi Tests Suite', () => {
 
     cy.wait(1000);
     cy.xpath(`//*[@id="toast-container"]`).should('not.be.empty');
-
-
   });
 
   it('testExportTaxiDriverReport', () => {
@@ -84,7 +81,7 @@ describe('Kane Taxi Tests Suite', () => {
     NavBar.goToConfigurationPage();
 
     cy.xpath('//*[@id="firstKMCost-edit-button"]').click();
-    
+
     cy.wait(1000);
     cy.xpath('//*[@id="firstKMCost-input"]').type('a');
 
@@ -102,7 +99,9 @@ describe('Kane Taxi Tests Suite', () => {
 
     let editButton = cy.xpath('//*[@id="firstKMCost-edit-button"]');
     let entrada = cy.xpath('//*[@id="firstKMCost-input"]');
-    let confirmButton = cy.xpath('//html/body/app-root/app-configuration/div/div[1]/div[2]/div[2]/button[2]');
+    let confirmButton = cy.xpath(
+      '//html/body/app-root/app-configuration/div/div[1]/div[2]/div[2]/button[2]'
+    );
 
     // lo probamos 2 veces para que vuelva a quedar en 800
     let values = ['200', '800'];
@@ -112,35 +111,48 @@ describe('Kane Taxi Tests Suite', () => {
       entrada.clear();
       entrada.type(value);
       confirmButton.click();
-  
+
       cy.wait(500);
       entrada.should('have.value', value);
     });
-
   });
 
   it('testSearch', () => {
     cy.log('Test ID: 10');
     cy.login();
-    
+
     let input = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/input');
-    input.type("Lopez");
+    input.type('Automation');
     let searchButton = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/span/button');
     searchButton.click();
-    let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div')
+    let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div');
     results.should('exist');
   });
 
   it('testSearchNonExistentDriver', () => {
     cy.log('Test ID: 11');
     cy.login();
-    
+
     let input = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/input');
-    input.type("Eduardo");
+    input.type('Eduardo');
     let searchButton = cy.xpath('//html/body/app-root/app-home/body/div[1]/form/div/span/button');
     searchButton.click();
-    let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div')
+    let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div');
     results.should('not.exist');
   });
 
+  it('reenableTaxiDriverAccount', () => {
+    cy.log('TEST ID: 6');
+    cy.login();
+
+    cy.fixture('reenableTaxiDriverAccount').then((data) => {
+      HomePage.searchUserByFirstName(data.driverName);
+      HomePage.openEditTaxiDriverByName(data.driverName);
+      TaxiDriverDetailsPage.disableAccount();
+      NavBar.goToReportsPage();
+      ReportsPage.enableInactiveTaxiDriverByName(data.driverName);
+    });
+
+    cy.logout();
+  });
 });
