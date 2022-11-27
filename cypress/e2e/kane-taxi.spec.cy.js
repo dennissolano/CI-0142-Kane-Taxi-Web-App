@@ -118,40 +118,6 @@ describe('Kane Taxi Tests Suite', () => {
     });
   });
 
-  it('testValidPasswordChange', () => {
-    cy.log('TEST ID: 9');
-
-    cy.login();
-    cy.fixture('testValidPasswordChange').then((data) => {
-      NavBar.goToConfigurationPage();
-
-      cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
-      ConfigurationPage.updatePassword(
-        data.currentPassword,
-        data.newPassword,
-        data.newPasswordConfirmation
-      );
-      //ToDo: verify password change message
-
-      cy.logout();
-
-      cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
-      cy.login(data.email, data.newPassword);
-
-      NavBar.goToConfigurationPage();
-      cy.log('Restoring old password');
-
-      ConfigurationPage.updatePassword(
-        data.newPassword,
-        data.currentPassword,
-        data.currentPassword
-      );
-      //ToDo: verify password change message.
-      cy.logout();
-    });
-    cy.logout();
-  });
-
   it.skip('testSearch', () => {
     cy.log('Test ID: 10');
     cy.login();
@@ -176,7 +142,7 @@ describe('Kane Taxi Tests Suite', () => {
     results.should('not.exist');
   });
 
-  it('testValidPasswordChange', () => {
+  it.skip('testValidPasswordChange', () => {
     cy.log('TEST ID: 9');
 
     cy.login();
@@ -224,7 +190,7 @@ describe('Kane Taxi Tests Suite', () => {
     cy.logout();
   });
 
-  it('testSearchDriverByIDInReportsPage', () => {
+  it.skip('testSearchDriverByIDInReportsPage', () => {
     cy.log('Test ID: 13');
     cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
       cy.login();
@@ -234,63 +200,7 @@ describe('Kane Taxi Tests Suite', () => {
     });
   });
 
-  it('testSearchDriverByNameInReportsPage', () => {
-    cy.log('Test ID: 14');
-    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
-      cy.login();
-      NavBar.goToReportsPage();
-      ReportsPage.searchTaxyDriver(data.name);
-      cy.login();
-    });
-  });
-
-  it('testSearchDriverByLastNameInReportsPage', () => {
-    cy.log('Test ID: 15');
-    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
-      cy.login();
-      NavBar.goToReportsPage();
-      ReportsPage.searchTaxyDriver(data.lastName);
-      cy.login();
-    });
-  });
-
-  it('testSearchDriverByEmailNameInReportsPage', () => {
-    cy.log('Test ID: 16');
-    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
-      cy.login();
-      NavBar.goToReportsPage();
-      ReportsPage.searchTaxyDriver(data.email);
-      cy.login();
-    });
-  });
-
-  it.skip('testSearchByMultipleOptionsInReportsPage', () => {
-    cy.log('ID: 13, 14, 15 and 16');
-    /* Once the search functionality is working in Reports page,
-     * this test will replace test cases with ID: 13-16.
-     */
-    cy.login();
-    NavBar.goToReportsPage();
-    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((options) => {
-      Object.entries(options).forEach(([key, value]) => {
-        cy.log(`Searching taxi driver by ${key} = ${value} on reports page`);
-        ReportsPage.searchTaxyDriver(value);
-      });
-    });
-    cy.logout();
-  });
-
-  it('testSearchDriverByIDInReportsPage', () => {
-    cy.log('Test ID: 13');
-    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
-      cy.login();
-      NavBar.goToReportsPage();
-      ReportsPage.searchTaxyDriver(data.id);
-      cy.login();
-    });
-  });
-
-  it('testSearchDriverByNameInReportsPage', () => {
+  it.skip('testSearchDriverByNameInReportsPage', () => {
     cy.log('Test ID: 14');
     cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
       cy.login();
