@@ -118,6 +118,40 @@ describe('Kane Taxi Tests Suite', () => {
     });
   });
 
+  it('testValidPasswordChange', () => {
+    cy.log('TEST ID: 9');
+
+    cy.login();
+    cy.fixture('testValidPasswordChange').then((data) => {
+      NavBar.goToConfigurationPage();
+
+      cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
+      ConfigurationPage.updatePassword(
+        data.currentPassword,
+        data.newPassword,
+        data.newPasswordConfirmation
+      );
+      //ToDo: verify password change message
+
+      cy.logout();
+
+      cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
+      cy.login(data.email, data.newPassword);
+
+      NavBar.goToConfigurationPage();
+      cy.log('Restoring old password');
+
+      ConfigurationPage.updatePassword(
+        data.newPassword,
+        data.currentPassword,
+        data.currentPassword
+      );
+      //ToDo: verify password change message.
+      cy.logout();
+    });
+    cy.logout();
+  });
+
   it.skip('testSearch', () => {
     cy.log('Test ID: 10');
     cy.login();
@@ -140,6 +174,40 @@ describe('Kane Taxi Tests Suite', () => {
     searchButton.click();
     let results = cy.xpath('//html/body/app-root/app-home/body/div[2]/div[1]/div');
     results.should('not.exist');
+  });
+
+  it('testValidPasswordChange', () => {
+    cy.log('TEST ID: 9');
+
+    cy.login();
+    cy.fixture('testValidPasswordChange').then((data) => {
+      NavBar.goToConfigurationPage();
+
+      cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
+      ConfigurationPage.updatePassword(
+        data.currentPassword,
+        data.newPassword,
+        data.newPasswordConfirmation
+      );
+      //ToDo: verify password change message
+
+      cy.logout();
+
+      cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
+      cy.login(data.email, data.newPassword);
+
+      NavBar.goToConfigurationPage();
+      cy.log('Restoring old password');
+
+      ConfigurationPage.updatePassword(
+        data.newPassword,
+        data.currentPassword,
+        data.currentPassword
+      );
+      //ToDo: verify password change message.
+      cy.logout();
+    });
+    cy.logout();
   });
 
   it.skip('testReenableTaxiDriverAccount', () => {
