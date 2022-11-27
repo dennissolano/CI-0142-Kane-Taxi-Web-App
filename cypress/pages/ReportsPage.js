@@ -15,7 +15,11 @@ class ReportsPage {
       ),
 
     taxiDriverEnabledMessage: () =>
-      cy.xpath("//div[contains(@aria-label, 'Se reactivó la usuaria al sistema')]")
+      cy.xpath("//div[contains(@aria-label, 'Se reactivó la usuaria al sistema')]"),
+
+    // Searching
+    searchDriverInput: cy.xpath('//*[@id="searchDriver"]'),
+    serachDriverButton: cy.xpath('//*[@id="btnSearchDriver"]')
   };
 
   openTaxiDriversInfo() {
@@ -45,6 +49,12 @@ class ReportsPage {
     this.elements.enableTaxiDriverByNameButton(driverName).click();
     this.elements.taxiDriverEnabledMessage().should('exist').and('be.visible');
     // Cypress automatically closes the confirmation alert window.
+  }
+
+  searchTaxyDriver(searchValue) {
+    this.elements.searchDriverInput().clear().type(searchValue);
+    this.elements.serachDriverButton().click();
+    cy.xpath(`//*[contains(text(), '${searchValue}')]`).should('exist').and('be.visible');
   }
 }
 
