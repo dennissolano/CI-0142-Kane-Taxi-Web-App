@@ -155,4 +155,21 @@ describe('Kane Taxi Tests Suite', () => {
 
     cy.logout();
   });
+
+  it('testSearchDriverInReportsPage', () => {
+    cy.log('Test ID: 13');
+    cy.login();
+
+    NavBar.goToReportsPage();
+
+    let searchInput = cy.xpath('//*[@id="searchDriver"]');
+    let searchButton = cy.xpath('//*[@id="btnSearchDriver"]');
+
+    searchInput.clear().type('Aylen');
+    searchButton.click();
+
+    let result = cy.xpath("//table[@id='tableSearchDriver']//*[contains(text(), 'Aylen')]");
+    result.should('exist');
+
+  });
 });
