@@ -11,6 +11,9 @@ class ConfigurationPage {
     this.elements.newPassworInput().type(newPassword);
     this.elements.confirmationPassworInput().type(newPasswordConfirmation);
     this.elements.changePasswordButton().click();
+    cy.xpath("//div[contains(text(), 'Su contraseña ha sido actualizada exitosamente')]")
+      .should('exist')
+      .and('be.visible');
   }
 }
 

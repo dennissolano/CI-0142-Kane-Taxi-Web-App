@@ -142,11 +142,10 @@ describe('Kane Taxi Tests Suite', () => {
     results.should('not.exist');
   });
 
-  it.skip('testValidPasswordChange', () => {
+  it('testValidPasswordChange', () => {
     cy.log('TEST ID: 9');
-
-    cy.login();
     cy.fixture('testValidPasswordChange').then((data) => {
+      cy.login();
       NavBar.goToConfigurationPage();
 
       cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
@@ -155,25 +154,21 @@ describe('Kane Taxi Tests Suite', () => {
         data.newPassword,
         data.newPasswordConfirmation
       );
-      //ToDo: verify password change message
-
       cy.logout();
 
       cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
       cy.login(data.email, data.newPassword);
 
-      NavBar.goToConfigurationPage();
       cy.log('Restoring old password');
+      NavBar.goToConfigurationPage();
 
       ConfigurationPage.updatePassword(
         data.newPassword,
         data.currentPassword,
         data.currentPassword
       );
-      //ToDo: verify password change message.
       cy.logout();
     });
-    cy.logout();
   });
 
   it.skip('testReenableTaxiDriverAccount', () => {
@@ -210,7 +205,7 @@ describe('Kane Taxi Tests Suite', () => {
     });
   });
 
-  it('testSearchDriverByLastNameInReportsPage', () => {
+  it.skip('testSearchDriverByLastNameInReportsPage', () => {
     cy.log('Test ID: 15');
     cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
       cy.login();
@@ -220,7 +215,7 @@ describe('Kane Taxi Tests Suite', () => {
     });
   });
 
-  it('testSearchDriverByEmailNameInReportsPage', () => {
+  it.skip('testSearchDriverByEmailNameInReportsPage', () => {
     cy.log('Test ID: 16');
     cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
       cy.login();
