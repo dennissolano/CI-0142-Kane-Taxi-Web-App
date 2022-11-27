@@ -27,11 +27,14 @@
 import LoginPage from '../pages/LoginPage';
 import NavBar from '../pages/commons/NavBar';
 
-Cypress.Commands.add('login', () => {
-  LoginPage.visit();
-  LoginPage.login(Cypress.config().testingEmail, Cypress.config().testingPassword);
-  cy.wait(3000);
-});
+Cypress.Commands.add(
+  'login',
+  (email = Cypress.config().testingEmail, password = Cypress.config().testingPassword) => {
+    LoginPage.visit();
+    LoginPage.login(email, password);
+    cy.wait(3000);
+  }
+);
 
 Cypress.Commands.add('logout', () => {
   NavBar.logout();
