@@ -2,6 +2,7 @@ import HomePage from '../pages/HomePage';
 import NavBar from '../pages/commons/NavBar';
 import ReportsPage from '../pages/ReportsPage';
 import TaxiDriverDetailsPage from '../pages/TaxiDriverDetailsPage';
+import ConfigurationPage from '../pages/ConfigurationPage';
 
 describe('Kane Taxi Tests Suite', () => {
   it('testLogin', () => {
@@ -141,6 +142,35 @@ describe('Kane Taxi Tests Suite', () => {
     results.should('not.exist');
   });
 
+  it('testValidPasswordChange', () => {
+    cy.log('TEST ID: 9');
+    cy.fixture('testValidPasswordChange').then((data) => {
+      cy.login();
+      NavBar.goToConfigurationPage();
+
+      cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
+      ConfigurationPage.updatePassword(
+        data.currentPassword,
+        data.newPassword,
+        data.newPasswordConfirmation
+      );
+      cy.logout();
+
+      cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
+      cy.login(data.email, data.newPassword);
+
+      cy.log('Restoring old password');
+      NavBar.goToConfigurationPage();
+
+      ConfigurationPage.updatePassword(
+        data.newPassword,
+        data.currentPassword,
+        data.currentPassword
+      );
+      cy.logout();
+    });
+  });
+
   it('testReenableTaxiDriverAccount', () => {
     cy.log('TEST ID: 6');
     cy.login();
@@ -152,7 +182,6 @@ describe('Kane Taxi Tests Suite', () => {
       NavBar.goToReportsPage();
       ReportsPage.enableInactiveTaxiDriverByName(data.driverName);
     });
-
     cy.logout();
   });
 
