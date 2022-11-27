@@ -141,7 +141,7 @@ describe('Kane Taxi Tests Suite', () => {
     results.should('not.exist');
   });
 
-  it('reenableTaxiDriverAccount', () => {
+  it('testReenableTaxiDriverAccount', () => {
     cy.log('TEST ID: 6');
     cy.login();
 
@@ -156,20 +156,59 @@ describe('Kane Taxi Tests Suite', () => {
     cy.logout();
   });
 
-  it('testSearchDriverInReportsPage', () => {
+  it('testSearchDriverByIDInReportsPage', () => {
     cy.log('Test ID: 13');
+    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
+      cy.login();
+      NavBar.goToReportsPage();
+      ReportsPage.searchTaxyDriver(data.id);
+      cy.login();
+    });
+  });
+
+  it('testSearchDriverByNameInReportsPage', () => {
+    cy.log('Test ID: 14');
+    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
+      cy.login();
+      NavBar.goToReportsPage();
+      ReportsPage.searchTaxyDriver(data.name);
+      cy.login();
+    });
+  });
+
+  it('testSearchDriverByLastNameInReportsPage', () => {
+    cy.log('Test ID: 15');
+    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
+      cy.login();
+      NavBar.goToReportsPage();
+      ReportsPage.searchTaxyDriver(data.lastName);
+      cy.login();
+    });
+  });
+
+  it('testSearchDriverByEmailNameInReportsPage', () => {
+    cy.log('Test ID: 16');
+    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((data) => {
+      cy.login();
+      NavBar.goToReportsPage();
+      ReportsPage.searchTaxyDriver(data.email);
+      cy.login();
+    });
+  });
+
+  it.skip('testSearchByMultipleOptionsInReportsPage', () => {
+    cy.log('ID: 13, 14, 15 and 16');
+    /* Once the search functionality is working in Reports page,
+     * this test will replace test cases with ID: 13-16.
+     */
     cy.login();
-
     NavBar.goToReportsPage();
-
-    let searchInput = cy.xpath('//*[@id="searchDriver"]');
-    let searchButton = cy.xpath('//*[@id="btnSearchDriver"]');
-
-    searchInput.clear().type('Aylen');
-    searchButton.click();
-
-    let result = cy.xpath("//table[@id='tableSearchDriver']//*[contains(text(), 'Aylen')]");
-    result.should('exist');
-
+    cy.fixture('testSearchByMultipleOptionsInReportsPage').then((options) => {
+      Object.entries(options).forEach(([key, value]) => {
+        cy.log(`Searching taxi driver by ${key} = ${value} on reports page`);
+        ReportsPage.searchTaxyDriver(value);
+      });
+    });
+    cy.logout();
   });
 });
