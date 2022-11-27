@@ -155,38 +155,4 @@ describe('Kane Taxi Tests Suite', () => {
     });
     cy.logout();
   });
-
-  it('testValidPasswordChange', () => {
-    cy.log('TEST ID: 9');
-
-    cy.login();
-    cy.fixture('testValidPasswordChange').then((data) => {
-      NavBar.goToConfigurationPage();
-
-      cy.log(`Updating password from ${data.currentPassword} to ${data.newPassword}`);
-      ConfigurationPage.updatePassword(
-        data.currentPassword,
-        data.newPassword,
-        data.newPasswordConfirmation
-      );
-      //ToDo: verify password change message
-
-      cy.logout();
-
-      cy.log(`Login with new credentials as ${data.email}/${data.newPassword} `);
-      cy.login(data.email, data.newPassword);
-
-      NavBar.goToConfigurationPage();
-      cy.log('Restoring old password');
-
-      ConfigurationPage.updatePassword(
-        data.newPassword,
-        data.currentPassword,
-        data.currentPassword
-      );
-      //ToDo: verify password change message.
-      cy.logout();
-    });
-    cy.logout();
-  });
 });
