@@ -18,8 +18,8 @@ class ReportsPage {
       cy.xpath("//div[contains(@aria-label, 'Se reactivó la usuaria al sistema')]"),
 
     // Searching
-    searchDriverInput: cy.xpath('//*[@id="searchDriver"]'),
-    serachDriverButton: cy.xpath('//*[@id="btnSearchDriver"]')
+    searchDriverInput: () => cy.xpath('//*[@id="searchDriver"]'),
+    serachDriverButton: () => cy.xpath('//*[@id="btnSearchDriver"]')
   };
 
   openTaxiDriversInfo() {
